@@ -1,0 +1,9 @@
+fastapi
+python-multipart
+uvicorn
+faster-whisper
+# faster-whisper 1.2.1 passes av.open(metadata_errors=...), which PyAV 19+ removed
+av<19
+# tests
+pytest
+httpx
