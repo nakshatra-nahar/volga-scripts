@@ -13,7 +13,7 @@ app = FastAPI(title="Timestamped transcription")
 def transcribe(file: UploadFile):
     try:
         segments, info = model.transcribe(file.file, beam_size=5)
-        # segments is lazy; decoding happens here. Times are seconds from the start of the audio;
+        # segments is lazy; the model runs here. Times are seconds from the start of the audio;
         # Whisper can predict a final end past the audio, so clamp it to the real duration.
         segments = [
             {"start": round(s.start, 2), "end": round(min(s.end, info.duration), 2), "text": s.text.strip()}

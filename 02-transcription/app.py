@@ -13,7 +13,7 @@ app = FastAPI(title="Transcription")
 def transcribe(file: UploadFile):
     try:
         segments, _ = model.transcribe(file.file, beam_size=5)
-        text = "".join(s.text for s in segments).strip()  # segments is lazy; decoding happens here
+        text = "".join(s.text for s in segments).strip()  # segments is lazy; the model runs here
     except av.error.FFmpegError:
         raise HTTPException(400, "File is not decodable audio")
     return {"text": text}
